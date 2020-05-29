@@ -472,3 +472,71 @@
         z-index: 1;
     }
 }
+
+
+//-------------------------------------// 
+// CALL TO ACTION //
+.cta {
+    padding: 3.5rem 0;
+    text-align: center;
+
+    &__book-now {
+        font-size: 2rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: 2.5rem;
+    }
+}
+
+
+//-------------------------------------// 
+// BUTTON BOOK NOW //
+.btn {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    border-radius: 100px;
+    border: none;
+    background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark));
+    color: var(--color-white);
+    position: relative;
+    overflow: hidden;   // Hide the invisible button
+    cursor: pointer;
+
+    // Select all of the children (visible and invisible)
+    & > * {
+        display: inline-block;  // To apply padding
+        height: 100%;   //Size of the parent element
+        width: 100%;   //Size of the parent element
+        transition: all .2s;
+    }
+    
+    &__visible {
+        padding: 2rem 7.5rem;
+    }
+
+    &__invisible {
+        display: inline-block;
+        position: absolute;
+        padding: 2rem 0;
+        left: 0;
+        top: -100%; // Size of the element
+    }
+
+    &:hover {
+        background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary-dark));
+    }
+
+    &:hover &__visible{
+        transform: translateY(100%);
+    }
+
+    &:hover &__invisible {
+        top: 0;
+    }
+
+    &:focus {
+        outline: none;
+        animation: pulsate 1s infinite;
+    }
+}
