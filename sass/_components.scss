@@ -1,0 +1,401 @@
+//-------------------------------------// 
+// LOGO // 
+.logo {
+    height: 3.25rem;
+    margin-left: 2rem;
+}
+
+
+//-------------------------------------// 
+// SEARCH // 
+.search {
+    flex: 0 0 40%;  // no grow, no shrink, occupy 40% of the header
+    display: flex;  // Nested flex
+    justify-content: center;    // Center items
+    align-items: center;    
+
+    &__input {
+        // Input elemnts do not inherit properties of the global document
+        font-family: inherit;   
+        font-size: inherit;     
+        color: inherit;
+        background-color: var(--color-grey-light-2);
+        border: none;
+        border-radius: 100rem;  // Set to very high number for rounded edges
+        padding: .7rem 2rem;
+        width: 90%;     // Leave room for expansion when focused
+        margin-right: -3.25rem;  // Negative margin moves button on top of the input
+        transition: all .2s;
+
+        &:focus {
+            outline: none;  // Remove default blue outline
+            width: 100%;
+            background-color: var(--color-grey-light-3);    // Becomes darker
+        }
+
+        // Change the input placeholder text
+        &::-webkit-input-placeholder {
+            font-weight: 100;
+            color: var(--color-grey-light-4);
+        }
+    }
+
+    &__input:focus + &__button {
+        background-color: var(--color-grey-light-3);    // Darcken background of the button when input is focused
+    }
+
+    &__button {
+        border: none;   // Removes border
+        background-color: var(--color-grey-light-2);    // Same color as input to blend in
+
+        &:focus {
+            outline: none;
+        }
+
+        &:active {
+            transform: translateY(2px); // Move slightly down when pressed
+        }
+
+    }
+
+    &__icon {
+        // To scale svg icon get height and width
+        height: 2rem;
+        width: 2rem;
+        fill: var(--color-grey-dark-3);    // Change color of the icon  
+    }
+}
+
+
+//-------------------------------------// 
+// USER NAVIGATION // 
+.user-nav {
+    align-self: stretch;    // User-nav fills the height of the header
+
+    display: flex;
+    align-items: center; 
+    
+    // Select all of the user-nav direct children
+    & > * {
+        height: 100%;   // Natigation elements fill the height of the header
+        padding: 0 2rem;
+        cursor: pointer;    // Change cursor to pointing finger
+        display: flex;
+        align-items: center;    // To center icons and user vertically 
+    }
+
+    & > *:hover {
+       background-color: var(--color-grey-light-2);
+    }
+
+    &__icon-box {
+        position: relative;
+    }
+
+    &__icon {
+        height: 2.25rem;
+        width: 2.25rem;
+        fill: var(--color-grey-dark-3);
+    }
+
+    &__notification {
+        font-size: .8rem;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 50%;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        position: absolute;
+        top: 1.5rem;
+        right: 1.1rem;
+
+        // Center text in the notification circle
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__user-photo {
+        height: 3.75rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+    }   
+}
+
+
+//-------------------------------------// 
+// SIDE NAVIGATION // 
+.side-nav {
+    font-size: 1.4rem;
+    list-style: none;
+    margin-top: 3.5rem;
+
+    &__item {
+        position: relative;
+
+        &:not(:last-child) {
+            margin-bottom: .5rem;
+        }
+    }
+
+    // Pseudo element for sidebar hover animation
+    &__item::before {
+        content: "";    // MANDATORY
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 3px;
+        background-color: var(--color-primary);
+        transform: scaleY(0);   // Hover effect invisible untill hover
+        // Different animations have different timing
+        transition: transform .2s, // height transformation
+                    // width transformation starts after height with .2s delay
+                    width .4s cubic-bezier(1,0,0,1) .2s, // Start quickly then slow down 
+                    background-color .1s; // background color lightens when active
+    }
+
+    // Home element and hovered elements
+    &__item:hover::before,
+    &__item--active::before {
+        transform: scaleY(1);
+        width: 100%;
+    }
+
+    // Background color lightens when active
+    &__item:active::before {
+        background-color: var(--color-primary-light);
+    }
+
+    &__link:link,
+    &__link:visited {
+        color: var(--color-grey-light-1);
+        text-decoration: none;
+        text-transform: uppercase;
+        display: block;
+        padding: 1.5rem 3rem;
+        position: relative;
+        z-index: 10;
+
+        display: flex;
+        align-items: center;
+    }
+
+    &__icon {
+        height: 1.75rem;
+        width: 1.75rem;
+        margin-right: 2rem;
+        fill: currentColor;
+    }
+}
+
+
+//-------------------------------------// 
+// COPYRIGHT TEXT // 
+.legal {
+    font-size: 1.2rem;
+    color: var(--color-grey-light-4);
+    text-align: center;
+    padding: 2.5rem;
+}
+
+//-------------------------------------// 
+// GALLERY // 
+.gallery {
+    display: flex;
+
+    &__item {
+
+    }
+
+    &__photo {
+        width: 100%;
+        display: block; // Display images as blocks to avoid white space
+    }
+}
+
+//-------------------------------------// 
+// OVERVIEW //
+.overview {
+    display: flex;
+    align-items: center;
+    border-bottom: var(--line);
+
+    &__heading {
+        font-size: 2.25;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 1.5rem 3rem;
+    }
+
+    &__stars {
+        margin-right: auto;
+        display: flex; // Removes white space and places stars side by side 
+                        // svg icons act like text
+                        //same result can be achieved by setting line-height: 0; and font-size: 0;
+    }
+
+    &__icon-star,
+    &__icon-location {
+        height: 1.75rem;
+        width: 1.75rem;
+        fill: var(--color-primary);
+    }
+
+    &__location {
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;  // vertical alignment of icon and text
+    }
+
+    &__icon-location {
+        margin-right: .5rem;
+    }
+
+    &__rating {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        margin-left: 3rem;
+        align-self: stretch;
+        padding: 0 2.25rem;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__rating-average {
+        font-size: 2.25rem;
+        font-weight: 300;
+        margin-bottom: -3px;
+    }
+
+    &__rating-count {
+        font-size: .8rem;
+        text-transform: uppercase;
+    }
+}
+
+
+//-------------------------------------// 
+// BUTTON INLINE //
+.btn-inline {
+    border: none;
+    color: var(--color-primary);
+    font-size: inherit;
+    border-bottom: 1px solid currentColor; // currentColor --> border same color as text when hover
+    padding-bottom: 2px;
+    display: inline-block;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .2s;
+
+    &:hover {
+        color: var(--color-grey-dark-1);
+        animation: pulsate 1s infinite; // button pulsates infinetely while hover
+    }
+
+    &:focus {
+        border: none;
+        
+    }
+}
+
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+
+    50% {
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: 0 1rem 4rem var(--color-black, .25);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
+
+//-------------------------------------// 
+// PARAGRAPH //
+.paragraph {
+    &:not(:last-of-type) {
+        margin-bottom: 2rem;
+    }
+}
+
+
+//-------------------------------------// 
+// LIST //
+.list {
+    list-style: none;
+    margin: 3rem 0;
+    padding: 3rem 0;
+    border-top: var(--line);
+    border-bottom: var(--line);
+
+    display: flex;
+    flex-wrap: wrap;
+
+    &__item {
+        flex: 0 0 50%;
+        margin-bottom: .7rem;
+    }
+
+    // SVG list icon
+    // Cleaner practice to use ::before pseudo element than adding it to item
+    &__item::before {
+        content: ""; // !!!!!!  MANDATORY
+        display: inline-block;
+        height: 1rem;
+        width: 1rem;
+        margin-right: .7rem;
+
+        // Older browsers
+        //background-image: url(../img/chevron-thin-right.svg);
+        //background-size: cover;
+
+        // Newer browsers --> MASKS
+        background-color: var(--color-primary);
+        -webkit-mask-image: url(../img/chevron-thin-right.svg); // SVG icon is the mask
+        -webkit-mask-size: cover;   // Has to be identified in case icon is larger than the element hehind it
+        mask-image: url(../img/chevron-thin-right.svg); 
+        mask-size: cover;
+    }
+}
+
+
+//-------------------------------------// 
+// RECOMMEND //
+.recommend {
+    font-size: 1.3rem;
+    color: var(--color-grey-dark-3);
+
+    display: flex;
+    align-items: center;
+
+    &__count {
+        margin-right: auto; // Push photos all the way to the right
+    }
+
+    &__friends {
+    }
+    
+    &__photo {
+        box-sizing: content-box;    // Default // Border on the outside of the element // Overwrite global setting
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+        border: 3px solid var(--color-white);
+
+        &:not(:last-child) {
+            margin-right: -1.5rem;  // Photos overlap like they are on top of one another
+        }
+    }
+
+}
