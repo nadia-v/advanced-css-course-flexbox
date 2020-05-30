@@ -22,6 +22,13 @@
     --shadow-light: 0 2rem 5rem rgba(0,0,0, .06);
 }
 
+//SASS VARIABLES
+$bp-largest: 75em;      // 1200px // 1200/16=75
+$bp-large: 68.75em;     // 1100px // 1100/16=68.75
+$bp-medium: 56.25em;    // 900px // 900/16=56.25
+$bp-small: 37.5em;      // 600px // 600/16=37.5
+$bp-smallest: 31.25em;  // 500px // 500/16=31.25
+
 
 // PROJECT SETTINGS
 * {
@@ -38,6 +45,10 @@
 html {
     box-sizing: border-box;
     font-size: 62.5%; // 1rem = 10px, 10px/16px = 62%
+
+    @media only screen and (max-width: $bp-large) {
+        font-size: 50%; // 1rem = 8px, 8px/16px = 50%
+    }
 }
 
 body {    
